@@ -16,15 +16,15 @@ class JSONResponse(HttpResponse):
 
 # csrf = Cross-Site Request Forgery
 @csrf_exempt
-def toy_list(request):
+def toy_list(request): # to show/list all the toys
     if request.method == 'GET':
         toys = Toy.objects.all()
         toys_serializer = ToySerializer(toys, many=True)
         return JSONResponse(toys_serializer.data)
     
     elif request.method == 'POST':
-        toy_data = JSONParser().parse(request)
-        toy_serializer = ToySerializer(data=toy_data)
+        toy_data = JSONParser().parse(request) # object->json
+        toy_serializer = ToySerializer(data=toy_data) # json-> dict-like
         if toy_serializer.is_valid():
             toy_serializer.save()
             return JSONResponse(toy_serializer.data, \
@@ -33,7 +33,7 @@ def toy_list(request):
             stratus=status.HTTP_400_BAD_REQUEST)
 
 @csrf_exempt
-def toy_detail(request, pk):
+def toy_detail(request, pk): # works on one single toy
     try:
         toy = Toy.objects.get(pk=pk)
     except Toy.DoesNotExist:
