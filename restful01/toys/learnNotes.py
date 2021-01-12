@@ -1,7 +1,10 @@
 """
 So far:
 serializer = object data (a toy instance) -> dictionary like serialized data
+deserializer =  dictionary like serialized data -> object data (a toy instance)
 
+Notice you will need to activate a django shell (by `python manage.py shell`) 
+and copy paste the code below into the shell to have them work.
 """
 # check and understand the serializer
 from datetime import datetime 
